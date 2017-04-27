@@ -1,0 +1,47 @@
+
+<div layout="row">
+
+  <div flex="66" flex-offset="15">
+   
+  <!--  {{$state.current}}  -->
+
+	<br>
+	
+   <md-nav-bar
+      md-selected-nav-item="currentNavItem"
+      nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="$state.go('index.school')" name="index.school"  >
+        Schools
+      </md-nav-item>
+	  
+      <md-nav-item md-nav-click="$state.go('index.schoolview')" ng-show="IC.current_school">
+        School View - {{IC.current_school}}
+      </md-nav-item>
+     
+	  
+	  <md-nav-item md-nav-click="$state.go('index.import')" >
+        Data Import
+      </md-nav-item>
+	  
+	  <md-nav-item md-nav-click="$state.go('index.export')" >
+        Data Export
+      </md-nav-item> 
+
+	
+	 
+	<!--   <md-nav-item md-nav-click="$state.go('index.settings')" >
+        Settings
+      </md-nav-item>
+ -->
+    </md-nav-bar>
+   
+	<ui-view></ui-view>
+   
+   
+  </div>
+  
+  <div flex>
+   
+	
+  </div>
+</div>

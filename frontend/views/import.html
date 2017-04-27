@@ -1,0 +1,139 @@
+  
+  
+  
+  
+  <br>
+  
+  
+  <md-card md-theme="default" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+           <span class="md-headline">School Import  </span>
+            <span class="md-subhead"> Source: 
+			<a target="_blank" href="https://education.alberta.ca/alberta-education/school-authority-index/everyone/alberta-schools/">Alberta Education</a>
+			, Gecoded with Google Maps Api
+			</span>
+			<p>Import the latest version of Education Alberta's School Index for further processing. Any new schools found will be added to the database and the user will be prompted to geocode them.  </p> 
+         </md-card-title-text>
+          <md-card-title-media style="min-width:30%">
+		<!-- <div class="md-media-sm card-media"></div>  -->
+		<div layout="column" layout-align="center center">
+		
+				<div style="margin-top:25px;" ng-if="IMPC.indexUpdate.loading" layout="row" layout-sm="column" layout-align="space-around">
+				  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</div>
+				<p ng-if="IMPC.indexUpdate.import_loading && IMPC.indexUpdate.loading"> Importing School Index List... </p>
+				<p ng-if="IMPC.indexUpdate.process_loading && IMPC.indexUpdate.loading"> Updating Database... </p>
+			
+			
+			 <md-button style="margin-top:50px;" ng-if="!IMPC.indexUpdate.loading && !IMPC.indexUpdate.import" ng-click="IMPC.EducationAlbertaIndexImport()" class="md-raised md-primary">Import</md-button>
+			
+			<div style="margin-top:50px;"  ng-if="IMPC.indexUpdate.import" class="alert alert-success" role="alert"><b>Import was successful!</b></div>
+			 
+         </div>
+		  </md-card-title-media> 
+		  
+		  
+		  
+		  
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          
+        </md-card-actions>
+</md-card>
+
+
+<!-- this table will contain any thing that needs to be gecoded -->
+
+
+  <md-card md-theme="default" md-theme-watch ng-if="IMPC.indexUpdate.import">
+ 
+
+	<div style="margin-top:25px;" ng-if="IMPC.geocodeCheck.loading" layout="row" layout-sm="column" layout-align="space-around">
+				  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
+	<p ng-if="IMPC.geocodeCheck.loading"> Checking for new or missing geocodes. </p>
+
+<md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <span flex>These schools require Geocoding. </span>
+	
+  </div>
+ </md-toolbar>
+
+			
+  
+	  <md-table-container >
+	  
+	  <!--ng-if="IMPC.geocodeCheck.data"-->
+	 
+<md-table-container ng-if="IMPC.missingGeocodes[0]">
+  <table md-table  md-progress="">
+    <thead md-head md-order="" md-on-reorder="">
+          <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>ID </span></th>
+        <th md-column ><span>Name</span></th>
+        <th md-column md-numeric>City</th>
+        <th md-column md-numeric>Type</th>
+        <th md-column md-numeric>Long</th>
+        <th md-column md-numeric>Lat</th>
+        <th md-column md-numeric>Updated</th>
+     
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="school" md-select-id="schoolCode" md-row-hover ng-repeat="school in IMPC.missingGeocodes"
+	  ng-click="IMPC.goToSchoolView(school)"
+	  >
+        <td md-cell>{{school.school_code}}</td>
+        <td md-cell>{{school.school_name}}</td>
+        <td md-cell>{{school.school_city}}</td>
+        <td md-cell>{{school.authority_type}}</td>
+        <td md-cell> Missing </td>
+        <td md-cell> Missing </td>
+        <td md-cell>{{school.school_updated}}</td>
+    
+    
+      </tr>
+		</tbody>
+	  </table>
+	</md-table-container>
+</md-card>
+  
+  
+   
+  <md-card md-theme="default" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+           <span class="md-headline">School Enrolment Import </span>
+            <span class="md-subhead"> Source: 
+			<a target="_blank" href="https://education.alberta.ca/alberta-education/school-authority-index/everyone/school-authority-information-reports/">Alberta Education</a>
+			</span>
+			<p>Import the latest enrolment numbers from Education Alberta. All enrolment numbers for schools years later then 2012 will be updated, this will ensure any changes by Education Alberta translate to this database.  </p> 
+         </md-card-title-text>
+          <md-card-title-media style="min-width:30%">
+		<!-- <div class="md-media-sm card-media"></div>  -->
+		<div layout="column" layout-align="center center">
+		
+				<div style="margin-top:50px;" ng-if="IMPC.enrolmentUpdate.loading" layout="row" layout-sm="column" layout-align="space-around">
+				  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</div>
+				<p ng-if="IMPC.enrolmentUpdate.import_loading && IMPC.enrolmentUpdate.loading"> Importing Enrolment... </p>
+				<p ng-if="IMPC.enrolmentUpdate.process_loading && IMPC.enrolmentUpdate.loading"> Updating Database... </p>
+			
+			
+			 <md-button style="margin-top:50px;" ng-if="!IMPC.enrolmentUpdate.loading && !IMPC.enrolmentUpdate.import" ng-click="IMPC.EducationAlbertaEnrolmentImport()" class="md-raised md-primary">Import</md-button>
+			 <div style="margin-top:50px;" ng-if="IMPC.enrolmentUpdate.import" class="alert alert-success" role="alert"><b>Import was successful!</b></div>
+			
+			 
+         </div>
+		  </md-card-title-media> 
+		  
+		  
+		  
+		  
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          
+        </md-card-actions>
+</md-card>

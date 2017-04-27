@@ -1,0 +1,87 @@
+  
+  
+  
+  
+  <br>
+  
+  
+  <md-card md-theme="default" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">School Location & Enrolment </span>
+            <span class="md-subhead"> Source: 
+			<a target="_blank" href="https://education.alberta.ca/alberta-education/school-authority-index/everyone/school-authority-information-reports/">Alberta Education</a>
+			, Gecoded with Google Maps Api
+			</span>
+			<p>Export all geocoded (longitude,latitude) schools located in the CRB region and their respective student populations for the selected ending school year.  </p>
+          </md-card-title-text>
+          <md-card-title-media style="min-width:30%">
+     <!--        <div class="md-media-sm card-media"></div> -->
+		<center>	<md-input-container style="margin-top:10%;">
+			  <label>School Year Starting</label>
+				 <md-select style="min-width:150px;" ng-model="EC.selectedSchoolPopulationYear" >
+				
+				<md-option ng-repeat="year in EC.SchoolDataYearRanges.enrolment" ng-value="year">
+				  {{year}}
+				</md-option>
+			</md-select>
+			
+			
+			 <md-button ng-if="EC.selectedSchoolPopulationYear" ng-click="EC.exportDataSchoolPopulation()" class="md-raised md-primary">Download</md-button>
+			 </md-input-container>
+          </center>
+		  </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          
+        </md-card-actions>
+</md-card>  
+
+
+<md-card md-theme="default" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">School Location & Enrolment Delta </span>
+            <span class="md-subhead"> Source: 
+			<a target="_blank" href="https://education.alberta.ca/alberta-education/school-authority-index/everyone/school-authority-information-reports/">Alberta Education</a>, Processed by:
+			<a target="_blank" href="http://capitalregionboard.ab.ca/">Capital Region Board</a>
+			
+			, Gecoded with Google Maps Api
+			</span>
+			<p>Export all geocoded (longitude,latitude) schools and compare enrolment between the two specified years. Enrolment for the selected starting year is subtracted from the selected ending year. Schools absent in the starting year with respect to the ending year are included.   </p>
+          </md-card-title-text>
+          <md-card-title-media style="min-width:30%">
+     <!--        <div class="md-media-sm card-media"></div> -->
+		<center>	
+		
+		<md-input-container style="margin-top:10%;">
+		  <label>Starting</label>
+			 <md-select style="min-width:150px;" ng-model="EC.selectedSchoolDeltaPopulationStartingYear" >
+				
+				<md-option ng-repeat="year in EC.SchoolDataYearRanges.enrolment" ng-value="year">
+				  {{year}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container style="margin-top:10%;">
+		 <label>Ending</label>
+			<md-select style="min-width:150px;" ng-model="EC.selectedSchoolDeltaPopulationEndingYear" >
+				
+				<md-option ng-repeat="year in EC.SchoolDataYearRanges.enrolment" ng-value="year">
+				  {{year}}
+				</md-option>
+			</md-select>
+			
+			</md-input-container>
+		   </center>
+		   <center>
+			 <md-button ng-if="EC.selectedSchoolDeltaPopulationEndingYear && EC.selectedSchoolDeltaPopulationStartingYear" ng-click="EC.exportDataSchoolDeltaPopulation()" class="md-raised md-primary">Download</md-button>
+			</center>
+		  </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          
+        </md-card-actions>
+</md-card>
+  
+  

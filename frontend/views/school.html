@@ -1,0 +1,96 @@
+
+
+<br>
+<ng-map 
+
+
+
+style="height:400px"
+on-click="SC.getPosition($event)"
+center="53.539936800,-113.507192300"
+zoom="{{SC.mapZoom}}"
+
+>
+
+<!-- position="{{school.lnglat}}"  -->
+ <marker 
+	ng-if="SC.response" 
+	info="{{school}}"
+	ng-repeat="school in SC.response.results" 
+	position="{{school.latitude}},{{school.longitude}}"
+	on-dragend="SC.updateSchool($event,school)" 
+    
+	draggable="true"
+	on-click="SC.mapClick($event,$index,school)"
+
+	 ></marker>
+	  
+	<info-window id="myInfoWindow" >
+		  <div ng-non-bindable>
+			
+			<h4>{{SC.selectedSchool.school_name}} - {{SC.selectedSchool.school_code}}</h4>
+			<p>{{SC.selectedSchool.school_city}}, {{SC.selectedSchool.school_province}} {{SC.selectedSchool.school_postal_code}}</p>
+			<p>{{SC.selectedSchool.school_address1}}<br> {{SC.selectedSchool.school_address2}}</p>
+		  </div> 
+	</info-window>
+	
+</ng-map>
+
+
+ 
+<md-card style="margin-left:0px; margin-right:0px;" md-theme="default" md-theme-watch>
+
+<!-- <md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <span>School List</span>
+  </div>
+  </md-toolbar> -->
+
+
+
+	  <md-table-pagination style="" md-limit="SC.table.limit" md-limit-options="[5, 10, 50, 100]" md-page="SC.table.page" md-total="{{SC.response.totalRecords}}" 
+md-on-paginate=SC.fetchSchoolList md-page-select></md-table-pagination>
+
+	
+
+<!-- exact table from live demo -->
+<md-table-container>
+  <table md-table ng-if="SC.response.results" ng-model="SC.SchoolListSelected" md-progress="">
+    <thead md-head md-order="" md-on-reorder="">
+      <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>ID </span></th>
+        <th md-column md-numeric md-order-by="calories.value"><span>Name</span></th>
+        <th md-column md-numeric>City</th>
+        <th md-column md-numeric>Type</th>
+        <th md-column md-numeric>Long</th>
+        <th md-column md-numeric>Lat</th>
+        <th md-column md-numeric>Updated</th>
+     
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="school" md-select-id="schoolCode"  md-row-hover ng-repeat="school in SC.response.results"
+	  ng-click="SC.goToSchoolView(school)"
+	  >
+        <td md-cell>{{school.school_code}}</td>
+        <td md-cell>{{school.school_name}}</td>
+        <td md-cell>{{school.school_city}}</td>
+        <td md-cell>{{school.authority_type}}</td>
+        <td md-cell>{{school.latitude}}</td>
+        <td md-cell>{{school.longitude}}</td>
+        <td md-cell>{{school.school_updated}}</td>
+    
+    
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+</md-card>
+
+<!-- 
+<div ng-repeat="school in SC.SchoolList" >
+
+<p>{{school.lnglat}}</p>
+</div> -->
+

@@ -1,0 +1,140 @@
+
+
+<md-card ng-if="SVC.schoolObj" md-theme="default" md-theme-watch>
+<md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <span flex>{{SVC.schoolObj.school_name}} <small style="margin-left:10px; font-size:12px;">{{SVC.schoolObj.latitude}},{{SVC.schoolObj.longitude}}</small></span>
+	
+	
+	<md-button style="color: white;" class="md-raised md-warn" ng-click="SVC.deleteSchool()">Delete School</md-button>
+	
+  </div>
+  </md-toolbar>
+
+  
+  <ng-map 
+
+
+	ng-if="SVC.schoolObj.latitude"
+	style="height:400px"
+	on-click="SVC.getPosition($event)"
+	center="{{SVC.schoolObj.latitude+','+SVC.schoolObj.longitude}}"
+	zoom="{{SVC.mapZoom}}"
+
+	>
+
+	<!-- position="{{school.lnglat}}"  -->
+	 <marker 
+		ng-if="SVC.schoolObj" 
+		info="{{SVC.schoolObj}}"
+		position="{{SVC.schoolObj.latitude}},{{SVC.schoolObj.longitude}}"
+		on-dragend="SVC.updateSchool($event,SVC.schoolObj)" 
+		
+		draggable="true"
+		
+
+		 ></marker>
+		  
+	
+	</ng-map>
+	
+	
+	
+	<md-card-title ng-if="!SVC.schoolObj.latitude">
+          <md-card-title-text>
+		    <span class="md-headline" layout="row" layout-align="center center"> Oops, we didn't find any coordinates! </span>
+			<center>
+			<br>
+			<md-button style="color: white; width:150px;" class="md-raised md-primary" ng-click="SVC.geocodeSchool()" layout="row" layout-align="center center">Geocode This.</md-button>
+			</center>
+		 </md-card-title-text>
+   </md-card-title>
+  
+   <md-card-title ng-if="SVC.schoolObj.enrolment[0]">
+          <md-card-title-text>
+		    <span class="md-headline"> Student Enrolment </span>
+		 </md-card-title-text>
+   </md-card-title>
+
+<md-card-title ng-if="!SVC.schoolObj.enrolment[0]">
+          <md-card-title-text>
+		    <span class="md-headline" layout="row" layout-align="center center"> No students have been enroled here since school year 2012. </span>
+		 </md-card-title-text>
+ </md-card-title>
+ 
+  
+  <style>
+  table.md-table th.md-column 
+  {
+   font-size:12px;
+  }
+  
+  table.md-table td.md-cell
+  {
+	font-size:12px;
+  }
+  table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2)
+  {
+  
+  padding: 0 30px 0 0;
+  }
+  
+  </style>
+	
+<md-table-container ng-if="SVC.schoolObj.enrolment[0]">
+  <table md-table  md-progress="">
+    <thead md-head md-order="" md-on-reorder="">
+      <tr md-row>
+       
+        <th md-column md-numeric>ECS </th>
+        <th md-column md-numeric>G1</th>
+        <th md-column md-numeric>G2</th>
+        <th md-column md-numeric>G3</th>
+        <th md-column md-numeric>G4</th>
+        <th md-column md-numeric>G5</th>
+        <th md-column md-numeric>G6</th>
+        <th md-column md-numeric>G7</th>
+        <th md-column md-numeric>G8</th>
+        <th md-column md-numeric>G9</th>
+        <th md-column md-numeric>G10</th>
+        <th md-column md-numeric>G11</th>
+        <th md-column md-numeric>G12</th>
+        <th md-column md-numeric>Total</th>
+        <th md-column md-numeric>Start Year </th>
+        <th md-column md-numeric>End Year </th>
+        <th md-column md-numeric>Updated</th>
+     
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select-id="schoolCode" md-auto-select ng-repeat="enrolment in SVC.schoolObj.enrolment"
+	
+	  >
+        <td md-cell>{{enrolment.ecs}}</td>
+        <td md-cell>{{enrolment.grade_1}}</td>
+        <td md-cell>{{enrolment.grade_2}}</td>
+        <td md-cell>{{enrolment.grade_3}}</td>
+        <td md-cell>{{enrolment.grade_4}}</td>
+        <td md-cell>{{enrolment.grade_5}}</td>
+        <td md-cell>{{enrolment.grade_6}}</td>
+        <td md-cell>{{enrolment.grade_7}}</td>
+        <td md-cell>{{enrolment.grade_8}}</td>
+        <td md-cell>{{enrolment.grade_9}}</td>
+        <td md-cell>{{enrolment.grade_10}}</td>
+        <td md-cell>{{enrolment.grade_11}}</td>
+        <td md-cell>{{enrolment.grade_12}}</td>
+        <td md-cell>{{enrolment.total}}</td>
+        <td md-cell>{{enrolment.start_year}}</td>
+        <td md-cell>{{enrolment.end_year}}</td>
+        <td md-cell>{{enrolment.enrollment_updated}}</td>
+
+    
+    
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+  
+
+</md-card>
+

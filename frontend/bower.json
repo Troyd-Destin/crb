@@ -1,0 +1,28 @@
+{
+  "name": "crb",
+  "description": "dependancies for crb front end project",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "directory": "assets/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "assets/bower_components"
+  ],
+  "dependencies": {
+    "angular-ui-router": "^0.3.2",
+    "angular-ui-select": "^0.19.6",
+    "angular-datatables": "^0.5.5",
+    "datatables": "^1.10.12",
+    "font-awesome": "^4.7.0",
+    "moment": "^2.17.0",
+    "select2": "^4.0.3",
+    "toastr": "^2.1.3",
+    "angular-material-data-table": "^0.10.10"
+  }
+}
