@@ -281,12 +281,13 @@ class DataRetrieval extends Model
 		
 		 	foreach($json['SelectedTopic']['SubTopics'] as $subTopic)
 			{
-				if($subTopic['FullUrl'] == 'http://education.alberta.ca/alberta-education/school-authority-index/')
+				$urls[] = $subTopic['FullUrl'];
+				if(strpos($subTopic['FullUrl'], 'alberta-education/school-authority-index') !== false )
 				{
 				
 					foreach($subTopic['ToolboxItems'] as $toolBoxItem)
 					{
-						if($toolBoxItem['FullUrl'] == 'http://education.alberta.ca/alberta-education/school-authority-index/everyone/school-authority-information-reports/')
+						if(strpos($toolBoxItem['FullUrl'], 'alberta-education/school-authority-index/everyone/school-authority-information-reports') !== false )
 						{
 							foreach($toolBoxItem['ResourceList']['FolderlessResourceFiles'] as $file)
 							{
@@ -308,6 +309,7 @@ class DataRetrieval extends Model
 				
 			} 
 			
+		
 		//Fix Authorities & Schools
 		$disk = Storage::disk('school-index')->getDriver()->getAdapter()->getPathPrefix();
 		$fileName = 'Authorities_and_Schools_Index.xlsx';
@@ -361,12 +363,12 @@ class DataRetrieval extends Model
 		
 		 	foreach($json['SelectedTopic']['SubTopics'] as $subTopic)
 			{
-				if($subTopic['FullUrl'] == 'http://education.alberta.ca/alberta-education/student-population/')
+				if(strpos($subTopic['FullUrl'], 'alberta-education/student-population') !== false )
 				{
 					
 					foreach($subTopic['ToolboxItems'] as $toolBoxItem)
 					{
-						if($toolBoxItem['FullUrl'] == 'http://education.alberta.ca/alberta-education/student-population/everyone/school-authority-enrolment-data/')
+						if(strpos($toolBoxItem['FullUrl'], 'alberta-education/student-population/everyone/school-authority-enrolment-data/') !== false )
 						{
 							foreach($toolBoxItem['ResourceList']['FolderlessResourceFiles'] as $file)
 							{

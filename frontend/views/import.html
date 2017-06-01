@@ -46,7 +46,7 @@
 <!-- this table will contain any thing that needs to be gecoded -->
 
 
-  <md-card md-theme="default" md-theme-watch ng-if="IMPC.indexUpdate.import">
+<md-card md-theme="default" md-theme-watch ng-if="IMPC.indexUpdate.import">
  
 
 	<div style="margin-top:25px;" ng-if="IMPC.geocodeCheck.loading" layout="row" layout-sm="column" layout-align="space-around">
@@ -54,12 +54,12 @@
 	</div>
 	<p ng-if="IMPC.geocodeCheck.loading"> Checking for new or missing geocodes. </p>
 
-<md-toolbar class="md-table-toolbar md-default">
-  <div class="md-toolbar-tools">
-    <span flex>These schools require Geocoding. </span>
-	
-  </div>
- </md-toolbar>
+	<md-toolbar class="md-table-toolbar md-default" ng-if="IMPC.missingGeocodes[0]">
+	  <div class="md-toolbar-tools">
+		<span flex>These schools require Geocoding. </span>
+		
+	  </div>
+	 </md-toolbar>
 
 			
   
